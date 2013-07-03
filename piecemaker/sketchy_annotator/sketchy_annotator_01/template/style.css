@@ -1,0 +1,62 @@
+body 
+{
+	background-color: white; 
+	color: black;
+	font-family: Lucida Grande, Lucida Sans, Arial, Helvetica Neue, Verdana, Geneva, sans-serif;
+	font-size: 11px; 
+	font-weight: normal; 
+	text-decoration: none;
+	line-height: 1.5em;
+	margin: 0px;
+	padding: 0px;
+}
+
+a img 
+{ 
+	border: 0px solid transparent;
+}
+
+a, a:link, a:visited, a:active, a:hover 
+{ 
+	color: #cdcdcd; 
+	text-decoration: underline;
+}
+
+.bigfatwarning
+{
+	color: red;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 1em;
+	border: 2px solid red;
+	text-align:center;
+	background-color: pink;
+}
+
+#header h1
+{
+	border-bottom: 1px solid black;
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+}
+
+canvas 
+{ 
+	display: block; 
+	outline: 0px; 
+	margin-bottom: 1.5em;
+}
+
+#content 
+{
+	width: 970px;
+	margin: 20px auto;
+	border-bottom: 1px solid black;
+	margin-bottom: 100px;
+	overflow: auto;
+}
+
+#content section
+{
+	width: 100%;
+}
