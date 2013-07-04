@@ -14,7 +14,7 @@ function sketchLoaded ( sketch ) {
     var pm = new PieceMakerApi({
         listener: sketch,
         api_key: "a79c66c0bb4864c06bc44c0233ebd2d2b1100fbe",
-        baseUrl: ( onLocalhost ? 'http://localhost:3000' : 'http://counterpoint.herokuapp.com' )
+        baseUrl: ( onLocalhost ? "http://localhost:3000" : "http://counterpoint.herokuapp.com" )
     });
     
     sketch.pmReady( pm, onLocalhost );

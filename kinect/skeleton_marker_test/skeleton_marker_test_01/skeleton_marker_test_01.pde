@@ -5,7 +5,7 @@
 import org.piecemaker.api.*;
 import de.bezier.guido.*;
 
-PieceMakerApi pm;
+PieceMakerApi api;
 Video video;
 Skeleton matteo;
 
@@ -19,6 +19,8 @@ boolean onLocalhost = true;
 boolean loaded = false;
 
 float rotY = HALF_PI/2;
+
+String kinectDataRoot = "http://motionbank-media.s3.amazonaws.com/jbmf/data/2012-05/kinect";
 
 void setup ()
 {
