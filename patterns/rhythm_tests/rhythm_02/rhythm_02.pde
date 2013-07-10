@@ -7,9 +7,12 @@ void setup() {
     size(1600,600);
     
     rhythmList.add(new Rhythm("cage",  "6,7,14,14,7"));
-//    rhythmList.add(new Rhythm("cyc",   "3,3,3,3,3,3"));
-    rhythmList.add(new Rhythm("three", "3,4,5,6"));
-//    rhythmList.add(new Rhythm("fib",   "1,1,2,3,5"));
+    rhythmList.add(new Rhythm("cyc",   "3,3,3,3,3,3"));
+    rhythmList.add(new Rhythm("three", "3,4,5"));
+//    rhythmList.add(new Rhythm("fib",   "1,1,2,3,5,8"));
+//    rhythmList.add(new Rhythm("fib",   "1,2,2,1,2,1,1,2"));
+    rhythmList.add(new Rhythm("fib",   "12,4"));
+    rhythmList.add(new Rhythm("abcde",   "5,7"));
     
     minNumBeats = rhythmList.getLowestCommon();
     println("min length " + minNumBeats + " beats");
@@ -117,6 +120,20 @@ void draw() {
     
     println(accu);
     
+    int[] adjs = new int[accu.length];
+    
+    for (int i=0; i<accu.length; i++) {
+        
+        if ( accu[i] > 0) {
+            int adj = 0;
+            if ( i>0 )             adj += accu[i-1];
+    //        if ( i>1 )             adj += accu[i-2];
+            if ( i<accu.length-1 ) adj += accu[i+1];
+    //        if ( i<accu.length-2 ) adj += accu[i+2];
+            adjs[i] = adj;
+        }
+    }
+    
     x = 0;
     y += 60;
     
@@ -131,60 +148,92 @@ void draw() {
     stroke(0);
     line(0,0,width-150,0);
     
+    
+    
     beginShape();
     
     curveTightness(1);
     
-    noFill();
-    stroke(255,0,0,80);
     
     v = accu[0];
+    
+    curveVertex(0,0);
+    curveVertex(0,0);
+    
     curveVertex(0,-v*h);
-    
-    //curveVertex(x-0.5*step,0);
-    //curveVertex(x-0.25*step,y+(h*v)/2);
-    
-    for (int i=0; i<accu.length-1; i++) {
+
+    for (int i=0; i<accu.length; i++) {
         
         v = accu[i];
         x = i*step;
-        ArrayList<Integer> ar = new ArrayList<Integer>();
-        float adj = 0.0;
-        
-        if ( i>0 )             adj += accu[i-1];
-//        if ( i>1 )             adj += accu[i-2];
-        if ( i<accu.length-1 ) adj += accu[i+1];
-//        if ( i<accu.length-2 ) adj += accu[i+2];
+
         
         if (v > 0 || true) {
-            noFill();
-            stroke(255,0,0,80);
-            //curveVertex(x-0.5*step,0);
-            //curveVertex(x-0.25*step,y+(h*v)/2);
-            curveVertex(x,-v*h);
-            //curveVertex(x+0.25*step,y+(h*v)/2);
-            //curveVertex(x+0.5*step,0);
-        }
-        if (v > 0 && adj > 0) {
-            fill(255 - adj*50);
+            fill(255,0,0);
+            stroke(255,0,0,150);
+            strokeWeight(1);
             noStroke();
-            ellipse(x,-v*h,20,20);
+
+            curveVertex(x,-v*h);
+
+        }
+        if (v > 0 && adjs[i] > 0) {
+            fill(255 - adjs[i]*50);
+            noStroke();
+            //ellipse(x,-v*h,20,20);
+            
+            rect(x-0.5*step,50,step,20);
         }
     }
     
     v = accu[accu.length-1];
     x = (accu.length-1)*step;
     
-    //curveVertex(x-0.5*step,0);
-    //curveVertex(x-0.25*step,y+(h*v)/2);
     curveVertex(x,-v*h);
     curveVertex(x,-v*h);
-    //curveVertex(x+0.25*step,y+(h*v)/2);
-    //curveVertex(x+0.5*step,0);
     
-    //curveVertex(x+0.5*step,0);
+    curveVertex(x,0);
+    curveVertex(x,0);
     
-    endShape();
+    endShape(CLOSE);
+    
+   blendMode(MULTIPLY);
+    
+    beginShape();
+    
+    curveTightness(1);
+    
+    
+    v = adjs[0];
+    
+    curveVertex(0,0);
+    curveVertex(0,0);
+    curveVertex(0,-v*h);
+
+    for (int i=0; i<accu.length; i++) {
+        
+        v = adjs[i];
+        x = i*step;
+
+        
+        if (v > 0 || true) {
+            fill(0,0,255,30);
+            strokeWeight(1);
+            stroke(0,0,255,150);
+            noStroke();
+            curveVertex(x,-v*h);
+
+        }
+    }
+    
+    v = adjs[adjs.length-1];
+    x = (adjs.length-1)*step;
+    
+    curveVertex(x,-v*h);
+    curveVertex(x,-v*h);
+    
+    endShape(CLOSE);
+     
     
     popMatrix();
     
