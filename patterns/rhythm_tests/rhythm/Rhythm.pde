@@ -18,10 +18,12 @@ public class RhythmList {
         return rhythms.size();
     }
     
-    int getLowestCommonDenominator() {
+    int getLowestCommon() {
         
         int sl = 0;
         float maxLength = 1;
+        //int inc = this.getShortestBySequences().getNumSequences();
+        int inc = 1;
         
         for (int i=0; i<rhythms.size(); i++) {
             maxLength *= rhythms.get(i).getNumBeatsTotal();
@@ -29,7 +31,7 @@ public class RhythmList {
         
         for (int i=0; i<maxLength; i++) {
             int isZero = 0;
-            sl++;
+            sl+=inc;
             
             for ( int j=0; j<rhythms.size(); j++) {
                 float v = sl % (float) rhythms.get(j).getNumBeatsTotal();
@@ -41,6 +43,15 @@ public class RhythmList {
         }
         
         return sl;
+    }
+    
+    Rhythm getShortestBySequences() {
+        Rhythm r0 = rhythms.get(0);
+        for (int i=1; i<rhythms.size(); i++) {
+            Rhythm r1 = rhythms.get(i);
+            if (r1.getNumSequences() < r0.getNumSequences()) r0 = r1;
+        }
+        return r0;
     }
 }
 
