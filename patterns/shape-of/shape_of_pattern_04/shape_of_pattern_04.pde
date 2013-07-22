@@ -18,14 +18,6 @@
      Interactive.make( this );
      
      game = new PatternGame();
-     
-     new Thread () {
-         public void run () {
-             while ( true ) {
-                 game.tick();
-             }
-         }
-     }.start();
  }
  
  void draw ()

@@ -197,7 +197,7 @@ void draw() {
     
     endShape(CLOSE);
     
-   blendMode(MULTIPLY);
+   //blendMode(MULTIPLY);
     
     beginShape();
     

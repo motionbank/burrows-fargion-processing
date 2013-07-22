@@ -149,7 +149,7 @@ class Agent {
             completeCycles++;
             //this.distance = (completeCycles + 1)*inc;
             rotation -= TWO_PI;
-            println("cycle" + completeCycles + " " + distance);
+            //println("cycle" + completeCycles + " " + distance);
         }
         
         if (activeTimer > 0) {
