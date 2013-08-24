@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Animated Star</title>
+	
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script type="text/javascript" src="js/paper.js"></script>
+	<script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery-ui.min.js" type="text/javascript"></script>
+	
+	<script src="js/Head.js" type="text/javascript"></script>
+	
+	<script type="text/paperscript" canvas="canvas">
+
+	</script>
+</head>
+<body>
+  
+  <style type="text/css">
+    #content {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      overflow: hidden;
+    }
+    
+    #content > *{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    
+    #content img{
+      width: 100%;
+    }
+  
+  </style>
+  
+  <script type="text/javascript">
+  
+  function  randomFrom(_ar) {
+    return _ar[Math.floor(Math.random()*_ar.length)];
+  };
+  
+  var config = {
+    duration: 500
+  };
+  
+  jQuery(function($) {
+    
+    $.prototype.random = function() {
+      return $( this[Math.floor(Math.random()*this.length)] );
+    };
+    
+    var head = new Head( $("#head") );
+    var arms = new Arms( $("#arms") );
+    head.run();
+    arms.run();
+    
+    setInterval(function() {
+      head.run();
+      arms.run();
+    },3000);
+
+  });
+  
+  </script>
+  
+  <div id="content">
+    <div id="arms"><img src="assets/arms-03.svg" alt="" /></div>
+    <div id="body"><img src="assets/body-02.svg" alt="" /></div>
+    <div id="head">
+      <img src="assets/head-02.svg" alt="" />
+      <img src="assets/head2-02.svg" alt="" />
+      <img src="assets/head3-02.svg" alt="" />
+    </div>
+  </div>
+  
+  
+	<canvas id="canvas" resize></canvas>
+</body>
+</html>
