@@ -2,18 +2,15 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Animated Star</title>
+	<title>Head changer 04</title>
 	
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
 	
-	<script type="text/javascript" src="js/paper.js"></script>
 	<script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui.min.js" type="text/javascript"></script>
 	
-	<script src="js/Head.js" type="text/javascript"></script>
-	
-	<script type="text/paperscript" canvas="canvas">
+	<script src="js/Parts.js" type="text/javascript"></script>
 
 	</script>
 </head>
@@ -37,8 +34,17 @@
     #content img{
       width: 100%;
     }
+    
+    #head img {
+      display: none;
+    }
+    
+    #head img:first-child {
+      display: block;
+    }
   
   </style>
+  
   
   <script type="text/javascript">
   
@@ -46,24 +52,22 @@
     return _ar[Math.floor(Math.random()*_ar.length)];
   };
   
-  var config = {
-    duration: 500
-  };
   
   jQuery(function($) {
     
+    // pick random jq element
     $.prototype.random = function() {
       return $( this[Math.floor(Math.random()*this.length)] );
     };
     
+    // init parts
     var head = new Head( $("#head") );
     var arms = new Arms( $("#arms") );
-    head.run();
-    arms.run();
     
+    // run animation
     setInterval(function() {
-      head.run();
-      arms.run();
+      if (!head.isRunning) head.run(2000);
+      if (!arms.isRunning) arms.run(2000);
     },3000);
 
   });
