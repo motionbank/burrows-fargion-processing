@@ -5,7 +5,7 @@ void initSequences ()
     {
         File[] files = seqDir.listFiles(new java.io.FilenameFilter(){
             public boolean accept ( File f, String fn ) {
-                return fn.contains("-MF-") && fn.endsWith(".txt");
+                return fn.contains("-JB-") && fn.endsWith(".txt");
             }
         });
         
