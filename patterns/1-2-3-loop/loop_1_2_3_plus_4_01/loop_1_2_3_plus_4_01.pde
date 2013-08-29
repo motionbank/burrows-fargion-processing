@@ -7,7 +7,7 @@ int permVal = 0;
 
 float[][] shape;
 
-int shapeDim = 5;
+int shapeDim = 4;
 float[][] shapeVertices;
 
 Permutation shapePerm;
@@ -42,7 +42,7 @@ void setup ()
     shapePermRow = shapePerm.next();
     shape = new float[0][0];
     
-    frameRate( 999 );
+    frameRate( 1 );
 }
 
 void draw ()
@@ -109,7 +109,7 @@ void draw ()
     
     pushMatrix();
     
-    scale( min(xScale, yScale) );
+    scale( min(xScale, yScale) * 0.5 );
     translate( -xMin, -yMin );
     
     beginShape();
