@@ -23,7 +23,7 @@ function Head ( _el ) {
         t.up, 
         "easeOutQuart",
         // ==================================================== show random graphic
-        function() { that.el.find(">*").hide().random().show(); }
+        function() { that.el.find(">*").removeClass("show").random().addClass("show"); }
       )
       // wait
       .delay( t.wait )
@@ -32,7 +32,14 @@ function Head ( _el ) {
         {top: 0 }, 
         t.down, 
         "easeOutQuart",
-        function() { that.isRunning = false; }
+        function() {
+          
+          that.isRunning = false;
+
+          if ( $("#head img.show").data("change-face") === true ) {
+            $("#face img").removeClass("show").random().addClass("show");
+          }
+        }
       );
   };
   

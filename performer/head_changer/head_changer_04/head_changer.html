@@ -17,6 +17,11 @@
 <body>
   
   <style type="text/css">
+    
+    .show {
+      display: block !important;
+    }
+    
     #content {
       position: relative;
       width: 400px;
@@ -35,13 +40,11 @@
       width: 100%;
     }
     
+    #face img,
     #head img {
       display: none;
     }
     
-    #head img:first-child {
-      display: block;
-    }
   
   </style>
   
@@ -64,27 +67,41 @@
     var head = new Head( $("#head") );
     var arms = new Arms( $("#arms") );
     
+    head.run(1000);
+    arms.run(1000);
+    
     // run animation
     setInterval(function() {
-      if (!head.isRunning) head.run(2000);
-      if (!arms.isRunning) arms.run(2000);
-    },3000);
+      if (!head.isRunning) head.run(1000);
+      if (!arms.isRunning) arms.run(1000);
+    },2000);
 
   });
   
   </script>
   
   <div id="content">
-    <div id="arms"><img src="assets/arms-03.svg" alt="" /></div>
-    <div id="body"><img src="assets/body-02.svg" alt="" /></div>
+    <div id="arms">
+      <img src="assets/03_arms_02.svg" alt="" />
+    </div>
+    <div id="body">
+      <img src="assets/03_body_02.svg" alt="" />
+    </div>
+    <div id="face">
+      <img src="assets/03_face_01.svg" alt="" class="show"/>
+      <img src="assets/03_face_02.svg" alt="" />
+      <img src="assets/03_face_03.svg" alt="" />
+      <img src="assets/03_face_04.svg" alt="" />
+      <img src="assets/face2.gif" alt="" />
+      <img src="assets/03_face_05.svg" alt="" />
+    </div>
     <div id="head">
-      <img src="assets/head-02.svg" alt="" />
-      <img src="assets/head2-02.svg" alt="" />
-      <img src="assets/head3-02.svg" alt="" />
+      <img src="assets/03_top_hair.svg" alt="" class="show"/>
+      <img src="assets/03_top_cloud.svg" alt="" data-change-face="true"/>
+      <img src="assets/03_top_bag.svg" alt="" data-change-face="true"/>
+      <img src="assets/03_top_blob.svg" alt="" data-change-face="true"/>
     </div>
   </div>
   
-  
-	<canvas id="canvas" resize></canvas>
 </body>
 </html>
