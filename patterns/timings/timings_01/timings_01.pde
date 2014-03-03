@@ -10,7 +10,7 @@
 import java.util.*;
 
 final static int KINECT_FPS = 30;
-final static String KINECT_DATA_ROOT = "/Library/WebServer/Documents/motionbank.org/lab/jbmf/data/documents-export-2013-07-03/";
+final static String KINECT_DATA_ROOT = "/Library/WebServer/Documents/motionbank.org/lab/jbmf-dev/data/documents-export-2013-07-03/";
 
 List<Sequence> sequences;
 

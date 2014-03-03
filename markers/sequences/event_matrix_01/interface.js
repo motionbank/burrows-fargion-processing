@@ -1,6 +1,7 @@
 
 var onLocalhost;
 var videoElement;
+var sketch;
 
 window.onload = function () {
     var neededJs = ['PieceMakerApi', 'Processing', 'jQuery'];
@@ -21,14 +22,16 @@ window.onload = function () {
     checkNeeded();
 }
 
-function sketchLoaded ( sketch ) {
+function sketchLoaded ( s ) {
+    
+    sketch = s;
     
     onLocalhost = window.location.href.match(/^http:\/\/127\.0\.0\.1.*/);
     
     var pm = new PieceMakerApi({
         listener: sketch,
         api_key: "a79c66c0bb4864c06bc44c0233ebd2d2b1100fbe",
-        baseUrl: ( onLocalhost ? 'http://localhost:3000' : 'http://counterpoint.herokuapp.com' )
+        baseUrl: ( onLocalhost && false ? 'http://localhost:3000' : 'http://counterpoint.herokuapp.com' )
     });
     
     sketch.pmReady( pm, onLocalhost );
@@ -40,8 +43,8 @@ function sketchLoaded ( sketch ) {
         sketch.mouseOut();
     });
     
-    pm.loadPieces(function(t,resp){
-        var pieces = resp.pieces;
+    pm.loadPieces(function(piecesCollection){
+        var pieces = piecesCollection.pieces;
         if ( pieces.length > 1 ) {
             var form = jQuery('<form id="select-piece">');
             var sel = jQuery('<select>');
@@ -66,9 +69,9 @@ function sketchLoaded ( sketch ) {
         }
     });
     
-    var pieceLoaded = function (t, piece) {
-        pm.loadVideosForPiece( piece.id, function(t,resp){
-            var videos = resp.videos;
+    var pieceLoaded = function (piece) {
+        pm.loadVideosForPiece( piece.id, function(videoCollection){
+            var videos = videoCollection.videos;
             var form = jQuery('<form id="select-video">');
             var sel = jQuery('<select>');
             form.append(sel);
@@ -83,7 +86,13 @@ function sketchLoaded ( sketch ) {
             form.submit(function(evt){
                 evt.preventDefault();
                 var videoId = sel.val();
-                pm.loadVideo(videoId);
+                pm.loadVideo( videoId, function(video){
+                    video.recorded_at = new Date( video.recorded_at );
+                    sketch.setVideo( video );
+                    pm.loadEventsForVideo( video.id, function(data){
+                        sketch.setEvents(data.events);
+                    });
+                });
                 return false;
             });
             jQuery('#interfaces').append(form);
@@ -91,8 +100,8 @@ function sketchLoaded ( sketch ) {
     }
 }
 
-var showVideo = function ( sketch, url )
-{
+var showVideo = function ( url )
+{    
     // create html elements
     var videoContainer = jQuery('#video-player');
     videoContainer.empty();
@@ -111,6 +120,7 @@ var showVideo = function ( sketch, url )
         var doPoll = function(){
             var now = videoElement.currentTime;
             if ( now != vMillis ) {
+                
                 sketch.videoTimeChanged( now );
                 vMillis = now;
             }
