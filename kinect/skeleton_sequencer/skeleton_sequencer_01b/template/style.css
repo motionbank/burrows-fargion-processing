@@ -1,0 +1,94 @@
+	body 
+	{
+		background-color: white; 
+		color: black;
+		font-family: Lucida Grande, Lucida Sans, Arial, Helvetica Neue, Verdana, Geneva, sans-serif;
+		font-size: 11px; 
+		font-weight: normal; 
+		text-decoration: none;
+		line-height: 1.5em;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	a img 
+	{ 
+		border: 0px solid transparent;
+	}
+
+	a, a:link, a:visited, a:active, a:hover 
+	{ 
+		color: #cdcdcd; 
+		text-decoration: underline;
+	}
+
+	canvas 
+	{ 
+		display: block; 
+		outline: 0px; 
+		margin-bottom: 1.5em;
+	}
+
+	#content 
+	{
+		width: 970px;
+		margin: 20px auto;
+		margin-bottom: 100px;
+		overflow: auto;
+	}
+
+	#content section
+	{
+		width: 100%;
+	}
+
+	#top-menu
+	{
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+
+	#interfaces
+	{
+		margin: 5px;
+	}
+
+	#video-player
+	{
+		text-align: center;
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
+
+	#filters
+	{
+		border-top: 1px solid black;
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
+
+	#filters .column
+	{
+		width: 20%;
+		margin-right: 5%;
+		float: left;
+	}
+
+	#filters div.last
+	{
+		margin-right: 0px;
+	}
+
+	.sequence-item
+	{
+		padding: 5px;
+		border: 1px solid #333;
+		float: left;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}
+
+	#sequences .template
+	{
+		display: none;
+	}
