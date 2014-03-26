@@ -9,13 +9,12 @@ jQuery(function () {
 	// setting up PM
 	var pm = new PieceMakerApi({
         api_key: "a79c66c0bb4864c06bc44c0233ebd2d2b1100fbe",
-        baseUrl: ( onLocalhost ? 'http://localhost:3000' : 'http://counterpoint.herokuapp.com' )
+        baseUrl: ( onLocalhost && false ? 'http://localhost:3000' : 'http://counterpoint.herokuapp.com' )
     });
 
     // load pieces from PM
-	pm.loadPieces(function(t,resp){
-	    var pieces = resp.pieces;
-	    
+	pm.loadPieces(function(data){
+	    var pieces = data.pieces;
 	    // TODO: make an interface for choosing the a piece
 	    //if ( pieces.length > 1 ) {
 	    	// make an interface for it later?
@@ -30,9 +29,9 @@ jQuery(function () {
 	});
 
 	// create popup menu
-	var pieceLoaded = function (t, piece) {
-        pm.loadVideosForPiece( piece.id, function(t,resp){
-            var videos = resp.videos;
+	var pieceLoaded = function ( piece ) {
+        pm.loadVideosForPiece( piece.id, function(data){
+            var videos = data.videos;
             var form = jQuery('<form id="select-video">');
             var sel = jQuery('<select>');
             form.append(sel);
@@ -55,7 +54,7 @@ jQuery(function () {
     };
 
     // initialize video element, load events
-    var videoLoaded = function (t, v) {
+    var videoLoaded = function (v) {
 
     	// fixes ms-detail date
     	v.recorded_at = new Date( v.recorded_at_float );
@@ -135,7 +134,7 @@ jQuery(function () {
     	})
     }
 
-    var eventsLoaded = function ( t, data ) {
+    var eventsLoaded = function ( data ) {
     	if ( data.total > 0 ) {
     		var events = [];
     		var performers = [];

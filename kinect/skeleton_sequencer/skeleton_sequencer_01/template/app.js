@@ -30,8 +30,9 @@ var App = (function(){
 	App.prototype = {
 		start: function (window, document) {
 			
-			onLocalhost = window.location.href.match(/^http:\/\/127\.0\.0\.1.*/) || 
-                  		     window.location.href.match(/^http:\/\/localhost.*/);
+			onLocalhost = false && 
+						  window.location.href.match(/^http:\/\/127\.0\.0\.1.*/) || 
+                  		  window.location.href.match(/^http:\/\/localhost.*/);
 			pm = new PieceMakerApi({
         		api_key: "a79c66c0bb4864c06bc44c0233ebd2d2b1100fbe",
         		baseUrl: ( onLocalhost ? 'http://localhost:3000' : 'http://counterpoint.herokuapp.com' )
